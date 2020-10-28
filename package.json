@@ -1,7 +1,7 @@
 {
   "name": "homebridge-wled-segment",
   "version": "0.0.1",
-  "description": "Platform for WLED with segment control",
+  "description": "An accessory plugin for homebridge to support WLED Strips with Segments as individual Bulbs",
   "license": "ISC",
   "repository": {
     "type": "git",
@@ -22,7 +22,8 @@
     "homebridge": ">=0.2.0"
   },
   "author": {
-    "name": "Florian R. N. Moreno"
+    "name": "Florian R. N. Moreno",
+    "email": "npm@floreno.de"
   },
   "bugs": {
     "url": "https://github.com/floreno/homebridge-wled-segment/issues"
