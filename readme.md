@@ -29,7 +29,7 @@ This [homebridge](https://github.com/nfarina/homebridge) plugin exposes a WLED R
 | `accessory` | Must be `WLEDSegment` | N/A |
 | `name` | Name to appear in the Home app | N/A |
 | `apiroute` | Root URL of your device | N/A |
-| `segment` | Segment to control | N/A |
+| `segment` | Segment to control | 0 |
 
 ### Options fields
 | Key | Description | Default |
