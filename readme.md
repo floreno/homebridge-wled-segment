@@ -2,7 +2,7 @@
 
 ## Description
 
-This [homebridge](https://github.com/nfarina/homebridge) plugin exposes a WLED RGB(W) device to Apple's [HomeKit](http://www.apple.com/ios/home/). Heavily based on [homebridge-wled-simple](fabiopigi/homebridge-wled-simple) and heavily based on [homebridge-web-rgb](https://github.com/Tommrodrigues/homebridge-web-rgb).
+This [homebridge](https://github.com/nfarina/homebridge) plugin exposes a WLED RGB(W) strip with segments as individual bulbs to Apple's [HomeKit](http://www.apple.com/ios/home/). Heavily based on [homebridge-wled-simple](fabiopigi/homebridge-wled-simple) and heavily based on [homebridge-web-rgb](https://github.com/Tommrodrigues/homebridge-web-rgb).
 
 ## Installation
 
