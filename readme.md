@@ -2,12 +2,12 @@
 
 ## Description
 
-This [homebridge](https://github.com/nfarina/homebridge) plugin exposes a WLED RGB device to Apple's [HomeKit](http://www.apple.com/ios/home/). Heavily based on [homebridge-web-rgb](https://github.com/Tommrodrigues/homebridge-web-rgb).
+This [homebridge](https://github.com/nfarina/homebridge) plugin exposes a WLED RGB(W) device to Apple's [HomeKit](http://www.apple.com/ios/home/). Heavily based on [homebridge-wled-simple](fabiopigi/homebridge-wled-simple) and heavily based on [homebridge-web-rgb](https://github.com/Tommrodrigues/homebridge-web-rgb).
 
 ## Installation
 
 1. Install [homebridge](https://github.com/nfarina/homebridge#installation-details)
-2. Install this plugin: `npm install -g homebridge-wled-segments`
+2. Install this plugin: `npm install -g homebridge-wled-segment`
 3. Update your `config.json` file
 
 ## Configuration
