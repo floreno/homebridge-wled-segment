@@ -1,4 +1,4 @@
-# homebridge-wled-simple
+# homebridge-wled-segment
 
 ## Description
 
@@ -7,7 +7,7 @@ This [homebridge](https://github.com/nfarina/homebridge) plugin exposes a WLED R
 ## Installation
 
 1. Install [homebridge](https://github.com/nfarina/homebridge#installation-details)
-2. Install this plugin: `npm install -g homebridge-wled-simple`
+2. Install this plugin: `npm install -g homebridge-wled-segments`
 3. Update your `config.json` file
 
 ## Configuration
@@ -15,9 +15,10 @@ This [homebridge](https://github.com/nfarina/homebridge) plugin exposes a WLED R
 ```json
 "accessories": [
      {
-       "accessory": "WLEDSimple",
+       "accessory": "WLEDSegment",
        "name": "Moodlight Livingroom",
-       "apiroute": "http://102.168.1.133"
+       "apiroute": "http://102.168.1.133",
+       "segment": 0
      }
 ]
 ```
@@ -25,9 +26,10 @@ This [homebridge](https://github.com/nfarina/homebridge) plugin exposes a WLED R
 ### Core
 | Key | Description | Default |
 | --- | --- | --- |
-| `accessory` | Must be `WLEDSimple` | N/A |
+| `accessory` | Must be `WLEDSegment` | N/A |
 | `name` | Name to appear in the Home app | N/A |
 | `apiroute` | Root URL of your device | N/A |
+| `segment` | Segment to control | N/A |
 
 ### Options fields
 | Key | Description | Default |
