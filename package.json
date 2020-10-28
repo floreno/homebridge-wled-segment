@@ -3,9 +3,14 @@
   "version": "0.0.1",
   "description": "Platform for WLED with segment control",
   "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/floreno/homebridge-wled-segment.git"
+  },
   "keywords": [
     "homebridge-plugin",
-    "wled"
+    "wled",
+    "segment"
   ],
   "dependencies": {
     "request": ">=2.88.0",
@@ -18,5 +23,9 @@
   },
   "author": {
     "name": "Florian R. N. Moreno"
-  }
+  },
+  "bugs": {
+    "url": "https://github.com/floreno/homebridge-wled-segment/issues"
+  },
+  "homepage": "https://github.com/floreno/homebridge-wled-segment#readme"
 }
