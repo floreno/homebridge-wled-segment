@@ -1,4 +1,4 @@
-var Service, Characteristic;
+ntvar Service, Characteristic;
 const packageJson = require("./package.json");
 const request = require("request");
 const convert = require("color-convert");
@@ -9,17 +9,18 @@ module.exports = function (homebridge) {
   Service = homebridge.hap.Service;
   Characteristic = homebridge.hap.Characteristic;
   homebridge.registerAccessory(
-    "homebridge-wled-simple",
-    "WLEDSimple",
-    WLEDSimple
+    "homebridge-wled-segment",
+    "WLEDSegment",
+    WLEDSegment
   );
 };
 
-function WLEDSimple(log, config) {
+function WLEDSegment(log, config) {
   this.log = log;
 
   this.name = config.name;
   this.apiroute = config.apiroute;
+  this.segment = config.segment || 0
   this.pollInterval = config.pollInterval || 300;
 
   this.requestArray = ["color", "brightness", "state"];
@@ -51,11 +52,12 @@ WLEDSimple.prototype = {
   },
 
   _httpRequest: function (url, body, method, callback) {
+    this.debug && this.log.debug("Setting %s", JSON.stringify(body));
     request(
       {
         url: url,
-        body: body,
-        method: "GET",
+        body: JSON.stringify(body),
+        method: method,
         timeout: this.timeout,
         rejectUnauthorized: false,
       },
@@ -67,7 +69,6 @@ WLEDSimple.prototype = {
 
   _getStatus: function (callback) {
     var url = this.apiroute + "/json/state";
-    this.debug && this.log.debug("Getting status: %s", url);
 
     this._httpRequest(
       url,
@@ -83,14 +84,14 @@ WLEDSimple.prototype = {
         } else {
           this.debug && this.log.debug("Device response: %s", responseBody);
           var json = JSON.parse(responseBody);
-          var hsv = convert.rgb.hsv(...json.seg[0].col);
+          var hsv = convert.rgb.hsv(...json.seg[this.segment].col);
           var bri = Math.ceil(json.bri / 2.55);
           this.cacheHue = hsv[0];
           this.cacheSaturation = hsv[1];
           this.service
             .getCharacteristic(Characteristic.On)
-            .updateValue(json.on);
-          this.debug && this.log("Updated state to: %s", json.on);
+            .updateValue(json.seg[this.segment].on);
+          this.debug && this.log("Updated state of segment %s to: %s", this.segment, json.on);
           if (!this.disableBrightness) {
             this.service
               .getCharacteristic(Characteristic.Brightness)
@@ -110,7 +111,7 @@ WLEDSimple.prototype = {
             this.debug &&
               this.log(
                 "Updated color to: #%s",
-                convert.rgb.hex(...json.seg[0].col)
+                convert.rgb.hex(...json.seg[this.segment].col)
               );
           }
           callback();
@@ -156,13 +157,12 @@ WLEDSimple.prototype = {
   },
 
   setOn: function (value, callback) {
-    var url = this.apiroute + "/win&FX=0&T=" + (value ? 1 : 0);
-    this.log.debug("Setting state: %s", url);
+    var setstate = {"seg":[{"id":this.segment,"on":(value ? true : false)}]}
 
     this._httpRequest(
       url,
-      "",
-      "GET",
+      setstate,
+      "POST",
       function (error, response, responseBody) {
         if (error) {
           this.log.warn("Error setting state: %s", error.message);
@@ -176,13 +176,12 @@ WLEDSimple.prototype = {
   },
 
   setBrightness: function (value, callback) {
-    var url = this.apiroute + "/win&A=" + Math.floor(value * 2.55);
-    this.log.debug("Setting brightness: %s", url);
+    var setstate = {"seg":[{"id":this.segment,"bri":Math.floor(value * 2.55)}]}
 
     this._httpRequest(
       url,
-      "",
-      "GET",
+      setstate,
+      "POST",
       function (error, response, responseBody) {
         if (error) {
           this.log.warn("Error setting brightness: %s", error.message);
@@ -215,16 +214,15 @@ WLEDSimple.prototype = {
     }
 
     var hex = convert.hsv.hex(this.cacheHue, this.cacheSaturation, 100);
-    var url = this.apiroute + "/win&CL=H" + hex;
-    this.log.debug("Setting color: %s", url);
+    var setstate = {"seg":[{"id":this.segment,"col":[[this._hexToRgb(hex).r, this._hexToRgb(hex).g, this._hexToRgb(hex).b]]}]}
 
     this._httpRequest(
       url,
-      "",
-      "GET",
+      setstate,
+      "POST",
       function (error, response, responseBody) {
         if (error) {
-          this.log.warn("Error setting color: %s", error);
+          this.log.warn("Error setting segment %s color: %s", this.segment, error);
           callback(error);
         } else {
           this.debug && this.log("Set color to: %s", hex);
