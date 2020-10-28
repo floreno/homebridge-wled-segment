@@ -17,7 +17,7 @@ This [homebridge](https://github.com/nfarina/homebridge) plugin exposes a WLED R
      {
        "accessory": "WLEDSegment",
        "name": "Moodlight Livingroom",
-       "apiroute": "http://102.168.1.133",
+       "apiroute": "http://wled.me",
        "segment": 0
      }
 ]
