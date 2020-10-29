@@ -166,6 +166,7 @@ WLEDSegment.prototype = {
   },
 
   setOn: function (value, callback) {
+    var url = this.apiroute + "/json/state";
     var setstate = {"seg":[{"id":this.segment,"on":(value ? true : false)}]}
 
     this._httpRequest(
@@ -185,6 +186,7 @@ WLEDSegment.prototype = {
   },
 
   setBrightness: function (value, callback) {
+    var url = this.apiroute + "/json/state";
     var setstate = {"seg":[{"id":this.segment,"bri":Math.floor(value * 2.55)}]}
 
     this._httpRequest(
@@ -222,6 +224,7 @@ WLEDSegment.prototype = {
       return;
     }
 
+    var url = this.apiroute + "/json/state";
     var hex = convert.hsv.hex(this.cacheHue, this.cacheSaturation, 100);
     var setstate = {"seg":[{"id":this.segment,"col":[[this._hexToRgb(hex).r, this._hexToRgb(hex).g, this._hexToRgb(hex).b]]}]}
 
