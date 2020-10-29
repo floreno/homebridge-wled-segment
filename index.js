@@ -45,7 +45,7 @@ function WLEDSegment(log, config) {
   this.service = new Service.Lightbulb(this.name);
 }
 
-WLEDSimple.prototype = {
+WLEDSegment.prototype = {
   identify: function (callback) {
     this.log("Identify requested!");
     callback();
