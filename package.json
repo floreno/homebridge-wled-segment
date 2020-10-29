@@ -1,6 +1,6 @@
 {
   "name": "homebridge-wled-segment",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "An accessory plugin for homebridge to support WLED Strips with Segments as individual Bulbs",
   "license": "ISC",
   "repository": {
