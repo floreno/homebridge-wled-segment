@@ -1,4 +1,4 @@
-ntvar Service, Characteristic;
+var Service, Characteristic;
 const packageJson = require("./package.json");
 const request = require("request");
 const convert = require("color-convert");
